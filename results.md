@@ -2,7 +2,7 @@
 
 
 ## Teste 1
-Treashold: 1
+Threshold: 1
 
 Número de exemplos: 60000 
 

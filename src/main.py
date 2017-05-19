@@ -54,7 +54,7 @@ if __name__ == '__main__':
     x_train, x_test = x_threshold[:60000], x_threshold[60000:]
     y_train, y_test = read_y()
     num_bits_addr = 32
-    randomize_positions = False
+    randomize_positions = True
     bleaching = True
     accuracy = apply_wisard(x_train, y_train, num_bits_addr, randomize_positions, bleaching)
     print 'Accuracy: {}'.format(accuracy)

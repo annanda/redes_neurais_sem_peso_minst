@@ -1,7 +1,7 @@
 # Usando Redes neurais sem peso para classificação de MNIST
 
 ## Passo 1:
-Crie os datasets binarizados com o threshold desejado usando o arquivo
+Crie os datasets binarizados com todos os thresholds usando o arquivo
 
 ```
 binarizar_x.py

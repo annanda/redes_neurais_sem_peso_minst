@@ -27,9 +27,11 @@ def create_file(file_name, content):
 
 
 def main():
-    threshold = 1
-    result = binarizar_x(X, threshold)
-    create_file(str(threshold), result)
+
+    for i in xrange(1, 255):
+        threshold = i
+        result = binarizar_x(X, threshold)
+        create_file(str(threshold), result)
 
 
 if __name__ == '__main__':

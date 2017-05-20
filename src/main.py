@@ -52,9 +52,7 @@ def apply_wisard(x_train, y_train, x_test, y_test, num_bits_addr, randomize_posi
 
 
 def test_thresholds():
-    with open('results.csv', 'w') as csv_file:
-        spamwriter = csv.writer(csv_file, delimiter=',')
-        for i in xrange(1, 255):
+        for i in xrange(67, 71):
             x_threshold = read_x(i)
             x_train, x_test = x_threshold[:60000], x_threshold[60000:]
             y_train, y_test = read_y()
@@ -62,7 +60,9 @@ def test_thresholds():
             randomize_positions = True
             bleaching = True
             accuracy = apply_wisard(x_train, y_train, x_test, y_test, num_bits_addr, randomize_positions, bleaching)
-            spamwriter.writerow([i, accuracy])
+            with open('results_' + str(i) + '.csv', 'w') as csv_file:
+                spamwriter = csv.writer(csv_file, delimiter=',')
+                spamwriter.writerow([i, accuracy])
             print 'Feito o threshold {}'.format(i)
 
 if __name__ == '__main__':

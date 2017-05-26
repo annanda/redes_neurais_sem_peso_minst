@@ -3,13 +3,10 @@
 from sklearn.datasets import fetch_mldata
 import csv
 
-mnist = fetch_mldata('MNIST original')
-
-X = mnist.data
-
 
 def binarizar_x(xd, threshold):
-    result = list(xd)
+    temp = list(xd)
+    result = temp[:]
     for i in xrange(len(result)):
         for j in xrange(len(result[i])):
             if result[i][j] >= threshold:
@@ -20,7 +17,7 @@ def binarizar_x(xd, threshold):
 
 
 def create_file(file_name, content):
-    with open('../binary_x/' + file_name + '.csv', 'wb') as csv_file:
+    with open('../binary_x/th_' + file_name + '.csv', 'wb') as csv_file:
         spamwriter = csv.writer(csv_file, delimiter=',')
         for line in content:
             spamwriter.writerow(line)
@@ -28,10 +25,13 @@ def create_file(file_name, content):
 
 def main():
 
-    for i in xrange(1, 255):
+    for i in xrange(2, 5):
+        mnist = fetch_mldata('MNIST original')
+        X = mnist.data
         threshold = i
         result = binarizar_x(X, threshold)
         create_file(str(threshold), result)
+        print "Criado dataset do th {}".format(threshold)
 
 
 if __name__ == '__main__':

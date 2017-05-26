@@ -8,16 +8,17 @@ import click
 
 QUANTIDADE_EXEMPLOS = 60000
 
+
 def read_y():
     mnist = fetch_mldata('MNIST original')
     y = mnist.target
     y_train, y_test = y[:QUANTIDADE_EXEMPLOS], y[60000:]
-    return y_train,y_test
+    return y_train, y_test
 
 
 def read_x(threshold):
     x = []
-    with open('binary_x/' + str(threshold) +'.csv', 'rb') as csvfile:
+    with open('binary_x/th_' + str(threshold) +'.csv', 'rb') as csvfile:
         lines = csvfile.readlines()
         for line in lines:
             line = line.split(',')
@@ -67,9 +68,10 @@ def test_thresholds(num_bits_addr, randomize_positions, bleaching, threshold):
         randomize_positions = randomize_positions
         bleaching = bleaching
         accuracy = apply_wisard(x_train, y_train, x_test, y_test, num_bits_addr, randomize_positions, bleaching)
-        with open('results_t_' + str(i) + '.csv', 'w') as csv_file:
+        with open('results_threshold_' + str(i) + '.csv', 'w') as csv_file:
             spamwriter = csv.writer(csv_file, delimiter=',')
             spamwriter.writerow([i, accuracy])
+            print 'threshod {}, acuracia {}'.format(i, accuracy)
         print 'Feito o threshold {}'.format(i)
 
 

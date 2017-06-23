@@ -148,3 +148,14 @@ acuracia parcial:0.827485714286
 acuracia parcial:0.9
 acuracia parcial:0.547085714286
 Exemplos [500], media acuracia 0.800342857143, desvio padrao acuracia 0.15066425439
+
+****************
+10 exemplos 0.449242857143, desvio padrao acuracia 0.111278876555 
+5 exemplos Th 1, media acuracia 0.376585714286, desvio padrao acuracia 0.174464130575 
+50 exemplos Th 1, media acuracia 0.637114285714, desvio padrao acuracia 0.144667593652 
+100 exemplos Th 1, media acuracia 0.699214285714, desvio padrao acuracia 0.147362285071
+Exemplos [150], media acuracia 0.729814285714, desvio padrao acuracia 0.145846647866
+Exemplos [200], media acuracia 0.7479, desvio padrao acuracia 0.143492549049 
+Exemplos [250], media acuracia 0.760942857143, desvio padrao acuracia 0.144638575598 
+Exemplos [300], media acuracia 0.772628571429, desvio padrao acuracia 0.146895820365 
+Exemplos [500], media acuracia 0.800342857143, desvio padrao acuracia 0.15066425439

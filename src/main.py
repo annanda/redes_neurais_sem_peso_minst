@@ -52,14 +52,14 @@ def generate_folds(X, y):
         x_test_folds.append(x_test)
         y_train_folds.append(y_train)
         y_test_folds.append(y_test)
-        print 'tamanho x train: {}'.format(len(x_train))
-        print 'tamanho x teste: {}'.format(len(x_test))
+        # print 'tamanho x train: {}'.format(len(x_train))
+        # print 'tamanho x teste: {}'.format(len(x_test))
         x_train = []
         x_test = []
         y_train = []
         y_test = []
-    print 'tamanho x fold: {}'.format(len(x_train_folds))
-    print x_train_folds[1][1]
+    # print 'tamanho x fold: {}'.format(len(x_train_folds))
+    # print x_train_folds[1][1]
     return x_train_folds, y_train_folds, x_test_folds, y_test_folds
 
 
@@ -83,41 +83,57 @@ def get_n_examples_each_class(n_examples, x_train, y_train):
 
 def apply_wisard(x_train_folds, y_train_folds, x_test_folds, y_test_folds, num_bits_addr, randomize_positions, bleaching):
     w = None
-    accuracies = []
-    for fold_number in xrange(4):
-        w = WiSARD(num_bits_addr, bleaching, randomize_positions)
-        w.fit(x_train_folds[fold_number], y_train_folds[fold_number])
-        predicted = w.predict(x_test_folds[fold_number])
-        expected = y_test_folds[fold_number]
-        accuracy = accuracy_score(predicted, expected)
-        print 'Accuracy {}: {}'.format(fold_number, accuracy)
-        accuracies.append(accuracy)
-    return accuracies
+    # accuracies = []
+    # for fold_number in xrange(4):
+    #     w = WiSARD(num_bits_addr, bleaching, randomize_positions)
+    #     w.fit(x_train_folds[fold_number], y_train_folds[fold_number])
+    #     predicted = w.predict(x_test_folds[fold_number])
+    #     expected = y_test_folds[fold_number]
+    #     accuracy = accuracy_score(predicted, expected)
+    #     print 'Accuracy {}: {}'.format(fold_number, accuracy)
+    #     accuracies.append(accuracy)
+    w = WiSARD(num_bits_addr, bleaching, randomize_positions)
+    w.fit(x_train_folds, y_train_folds)
+    predicted = w.predict(x_test_folds)
+    expected = y_test_folds
+    accuracy = accuracy_score(predicted, expected)
+    # print 'Accuracy {}: {}'.format(fold_number, accuracy)
+    # accuracies.append(accuracy)
+    return accuracy
 
 @click.command()
-@click.option('--num_bits_addr', type=click.INT, default=32, help='Numero de addr memory')
+@click.option('--num_bits_addr', type=click.INT, default=34, help='Numero de addr memory')
 @click.option('--randomize_positions', type=click.BOOL, default=True, help='Randomize position')
 @click.option('--bleaching', type=click.BOOL, default=True, help='Bleaching')
 @click.option('--threshold', type=click.INT, default=1, help='Threshold do dataset')
 def test_thresholds(num_bits_addr, randomize_positions, bleaching, threshold):
-        i = threshold
-        x = read_x(i)
-        y = read_y()
-        x_train_folds, y_train_folds, x_test_folds, y_test_folds = generate_folds(x, y)
-        num_bits_addr = num_bits_addr
-        randomize_positions = randomize_positions
-        bleaching = bleaching
-        accuracies = apply_wisard(
-            x_train_folds,
-            y_train_folds,
-            x_test_folds,
-            y_test_folds,
-            num_bits_addr,
-            randomize_positions,
-            bleaching
-        )
-        # print(accuracies)
-        print '{},{},{}'.format(i, np.mean(accuracies), np.std(accuracies))
+    exemplos = [150, 200, 250, 300, 500, 1000, 5000]
+    for exemplo in exemplos:
+        for i in xrange(1, 2):
+            # i = threshold
+            x = read_x(i)
+            y = read_y()
+            x_train_folds, y_train_folds, x_test_folds, y_test_folds = generate_folds(x, y)
+            acuracias = []
+            for j in xrange(4):
+                x_train, y_train = [], []
+                x_train, y_train = get_n_examples_each_class(exemplo, x_train_folds[j], y_train_folds[j])
+                num_bits_addr = num_bits_addr
+                randomize_positions = randomize_positions
+                bleaching = bleaching
+                accuracies = apply_wisard(
+                    x_train,
+                    y_train,
+                    x_test_folds[j],
+                    y_test_folds[j],
+                    num_bits_addr,
+                    randomize_positions,
+                    bleaching
+                )
+                print 'acuracia parcial:{}'.format(accuracies)
+                acuracias.append(accuracies)
+                # print('Th: {} Acuracia: {}'.format(i, accuracies))
+            print 'Exemplos {}, media acuracia {}, desvio padrao acuracia {}'.format(exemplos, np.mean(acuracias), np.std(acuracias))
         # with open('results_threshold_' + str(i) + '.csv', 'w') as csv_file:
         #     spamwriter = csv.writer(csv_file, delimiter=',')
         #     spamwriter.writerow([i, accuracy])

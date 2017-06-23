@@ -100,3 +100,51 @@ Threshold, acurácia
 64,0.1135
 65,0.1135
 66,0.1135
+
+1,0.9454
+2,0.9463
+3,0.9458
+4,0.9451
+5,0.9458
+
+
+Com 10 exemplos escolhidos aleatóriamente de cada classe: 
+Th: 1 Acuracia: 0.707542857143
+(sem crossvalidation 4-folds)
+
+10 exemplos
+Th 1, media acuracia 0.449242857143, desvio padrao acuracia 0.111278876555
+5 exemplos
+Th 1, media acuracia 0.376585714286, desvio padrao acuracia 0.174464130575 
+50 exemplos 
+Th 1, media acuracia 0.637114285714, desvio padrao acuracia 0.144667593652
+100 exemplos
+Th 1, media acuracia 0.699214285714, desvio padrao acuracia 0.147362285071
+
+
+
+acuracia parcial:0.883885714286
+acuracia parcial:0.688971428571
+acuracia parcial:0.8364
+acuracia parcial:0.51
+Exemplos [150], media acuracia 0.729814285714, desvio padrao acuracia 0.145846647866
+acuracia parcial:0.893142857143
+acuracia parcial:0.7228
+acuracia parcial:0.851257142857
+acuracia parcial:0.5244
+Exemplos [200], media acuracia 0.7479, desvio padrao acuracia 0.143492549049
+acuracia parcial:0.902
+acuracia parcial:0.7508
+acuracia parcial:0.861485714286
+acuracia parcial:0.529485714286
+Exemplos [250], media acuracia 0.760942857143, desvio padrao acuracia 0.144638575598
+acuracia parcial:0.913028571429
+acuracia parcial:0.773371428571
+acuracia parcial:0.870342857143
+acuracia parcial:0.533771428571
+Exemplos [300], media acuracia 0.772628571429, desvio padrao acuracia 0.146895820365
+acuracia parcial:0.9268
+acuracia parcial:0.827485714286
+acuracia parcial:0.9
+acuracia parcial:0.547085714286
+Exemplos [500], media acuracia 0.800342857143, desvio padrao acuracia 0.15066425439
